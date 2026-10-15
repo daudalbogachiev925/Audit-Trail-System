@@ -40,4 +40,12 @@ def groups():
 
 @app.get("/integrity")
 def integrity():
-    return verify_chain(audit.all
+    return verify_chain(audit.all())
+
+@app.get("/reports/compliance")
+def compliance():
+    return compliance_summary(audit.all())
+
+@app.get("/reports/resource/{resource}")
+def resource_report(resource: str):
+    return access_report(audit.all(), resource)
